@@ -1,0 +1,495 @@
+```html
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Panel del Facilitador</title>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<style>
+
+:root{
+    --primary:#1E88E5;
+    --secondary:#1565C0;
+    --success:#2E7D32;
+    --warning:#F9A825;
+    --danger:#C62828;
+}
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:Arial, Helvetica, sans-serif;
+    background:#f4f6f9;
+    padding:20px;
+}
+
+.container{
+    max-width:1400px;
+    margin:auto;
+}
+
+header{
+    background:white;
+    padding:20px;
+    border-radius:10px;
+    margin-bottom:20px;
+    box-shadow:0 2px 6px rgba(0,0,0,.1);
+}
+
+.card{
+    background:white;
+    padding:20px;
+    border-radius:10px;
+    margin-bottom:20px;
+    box-shadow:0 2px 6px rgba(0,0,0,.08);
+}
+
+h1{
+    color:var(--primary);
+}
+
+.grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:15px;
+}
+
+.stat{
+    padding:20px;
+    border-radius:10px;
+    color:white;
+    text-align:center;
+}
+
+.blue{
+    background:#1976D2;
+}
+
+.green{
+    background:#2E7D32;
+}
+
+.orange{
+    background:#F57C00;
+}
+
+.red{
+    background:#C62828;
+}
+
+.purple{
+    background:#6A1B9A;
+}
+
+.stat h2{
+    margin-top:10px;
+}
+
+button{
+    padding:12px 18px;
+    border:none;
+    border-radius:8px;
+    cursor:pointer;
+    background:#1E88E5;
+    color:white;
+    font-weight:bold;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+}
+
+th{
+    background:#1565C0;
+    color:white;
+}
+
+th, td{
+    border:1px solid #ddd;
+    padding:10px;
+    text-align:center;
+}
+
+tr:nth-child(even){
+    background:#f9f9f9;
+}
+
+.badge{
+    padding:6px 10px;
+    border-radius:20px;
+    color:white;
+    font-size:.8rem;
+}
+
+.perfilA{
+    background:#C62828;
+}
+
+.perfilB{
+    background:#F57C00;
+}
+
+.perfilC{
+    background:#1976D2;
+}
+
+.perfilD{
+    background:#2E7D32;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<header>
+
+<h1>Panel del Facilitador</h1>
+
+<p>
+Resultados del diagnóstico de Inglés Nivel 1
+</p>
+
+<br>
+
+<button onclick="cargarDatos()">
+Actualizar Datos
+</button>
+
+</header>
+
+<div class="grid">
+
+<div class="stat blue">
+<p>Total estudiantes</p>
+<h2 id="totalEstudiantes">0</h2>
+</div>
+
+<div class="stat green">
+<p>Promedio General</p>
+<h2 id="promedioGeneral">0</h2>
+</div>
+
+<div class="stat orange">
+<p>Perfil A</p>
+<h2 id="perfilA">0</h2>
+</div>
+
+<div class="stat red">
+<p>Perfil B</p>
+<h2 id="perfilB">0</h2>
+</div>
+
+<div class="stat purple">
+<p>Perfil C</p>
+<h2 id="perfilC">0</h2>
+</div>
+
+<div class="stat green">
+<p>Perfil D</p>
+<h2 id="perfilD">0</h2>
+</div>
+
+</div>
+
+<div class="card">
+
+<h2>Promedios por Indicador</h2>
+
+<br>
+
+<table>
+
+<thead>
+
+<tr>
+<th>Indicador</th>
+<th>Promedio</th>
+</tr>
+
+</thead>
+
+<tbody>
+
+<tr>
+<td>Bloque 1</td>
+<td id="pb1">0</td>
+</tr>
+
+<tr>
+<td>Bloque 2</td>
+<td id="pb2">0</td>
+</tr>
+
+<tr>
+<td>Bloque 3</td>
+<td id="pb3">0</td>
+</tr>
+
+<tr>
+<td>Bloque 4</td>
+<td id="pb4">0</td>
+</tr>
+
+<tr>
+<td>Bloque 5</td>
+<td id="pb5">0</td>
+</tr>
+
+</tbody>
+
+</table>
+
+</div>
+
+<div class="card">
+
+<h2>Resultados Individuales</h2>
+
+<br>
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>Nombre</th>
+<th>Correo</th>
+<th>Grupo</th>
+
+<th>Total</th>
+<th>Nivel</th>
+<th>Perfil</th>
+
+<th>B1</th>
+<th>B2</th>
+<th>B3</th>
+<th>B4</th>
+<th>B5</th>
+
+<th>Fecha</th>
+
+</tr>
+
+</thead>
+
+<tbody id="tablaResultados">
+
+</tbody>
+
+</table>
+
+</div>
+
+</div>
+
+<script>
+
+/* ===========================
+SUPABASE
+=========================== */
+
+const SUPABASE_URL =
+"https://iikwmdqlxoidrgbyzria.supabase.co";
+
+const SUPABASE_KEY =
+"sb_publishable_xhiLL7bZYkHMUwa0qc3_ew_836VsmdE";
+
+const supabaseClient =
+supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_KEY
+);
+
+/* ===========================
+PERFIL COLOR
+=========================== */
+
+function perfilBadge(perfil){
+
+    if(perfil==="Perfil A"){
+        return "perfilA";
+    }
+
+    if(perfil==="Perfil B"){
+        return "perfilB";
+    }
+
+    if(perfil==="Perfil C"){
+        return "perfilC";
+    }
+
+    return "perfilD";
+}
+
+/* ===========================
+CARGAR DATOS
+=========================== */
+
+async function cargarDatos(){
+
+    const { data, error } =
+    await supabaseClient
+    .from("diagnostico_ingles_nivel1")
+    .select("*")
+    .order("fecha",{ascending:false});
+
+    if(error){
+
+        alert("Error cargando datos");
+        console.error(error);
+        return;
+
+    }
+
+    let tabla =
+    document.getElementById("tablaResultados");
+
+    tabla.innerHTML="";
+
+    let totalEstudiantes =
+    data.length;
+
+    let sumaTotal=0;
+
+    let sumaB1=0;
+    let sumaB2=0;
+    let sumaB3=0;
+    let sumaB4=0;
+    let sumaB5=0;
+
+    let A=0;
+    let B=0;
+    let C=0;
+    let D=0;
+
+    data.forEach(est=>{
+
+        sumaTotal += est.puntaje_total || 0;
+
+        sumaB1 += est.bloque1 || 0;
+        sumaB2 += est.bloque2 || 0;
+        sumaB3 += est.bloque3 || 0;
+        sumaB4 += est.bloque4 || 0;
+        sumaB5 += est.bloque5 || 0;
+
+        if(est.perfil==="Perfil A") A++;
+        if(est.perfil==="Perfil B") B++;
+        if(est.perfil==="Perfil C") C++;
+        if(est.perfil==="Perfil D") D++;
+
+        tabla.innerHTML += `
+
+        <tr>
+
+        <td>${est.nombre || ""}</td>
+
+        <td>${est.correo || ""}</td>
+
+        <td>${est.grupo || ""}</td>
+
+        <td>${est.puntaje_total || 0}</td>
+
+        <td>${est.nivel_global || ""}</td>
+
+        <td>
+        <span class="badge ${perfilBadge(est.perfil)}">
+        ${est.perfil}
+        </span>
+        </td>
+
+        <td>${est.bloque1 || 0}</td>
+        <td>${est.bloque2 || 0}</td>
+        <td>${est.bloque3 || 0}</td>
+        <td>${est.bloque4 || 0}</td>
+        <td>${est.bloque5 || 0}</td>
+
+        <td>
+        ${new Date(est.fecha).toLocaleString()}
+        </td>
+
+        </tr>
+
+        `;
+
+    });
+
+    document.getElementById("totalEstudiantes")
+    .textContent = totalEstudiantes;
+
+    document.getElementById("promedioGeneral")
+    .textContent =
+    totalEstudiantes
+    ? (sumaTotal/totalEstudiantes).toFixed(2)
+    : 0;
+
+    document.getElementById("perfilA")
+    .textContent=A;
+
+    document.getElementById("perfilB")
+    .textContent=B;
+
+    document.getElementById("perfilC")
+    .textContent=C;
+
+    document.getElementById("perfilD")
+    .textContent=D;
+
+    document.getElementById("pb1")
+    .textContent =
+    totalEstudiantes
+    ? (sumaB1/totalEstudiantes).toFixed(2)
+    : 0;
+
+    document.getElementById("pb2")
+    .textContent =
+    totalEstudiantes
+    ? (sumaB2/totalEstudiantes).toFixed(2)
+    : 0;
+
+    document.getElementById("pb3")
+    .textContent =
+    totalEstudiantes
+    ? (sumaB3/totalEstudiantes).toFixed(2)
+    : 0;
+
+    document.getElementById("pb4")
+    .textContent =
+    totalEstudiantes
+    ? (sumaB4/totalEstudiantes).toFixed(2)
+    : 0;
+
+    document.getElementById("pb5")
+    .textContent =
+    totalEstudiantes
+    ? (sumaB5/totalEstudiantes).toFixed(2)
+    : 0;
+
+}
+
+/* ===========================
+INICIO
+=========================== */
+
+cargarDatos();
+
+</script>
+
+</body>
+</html>
+```

@@ -1,0 +1,1359 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Diagnóstico Inglés Nivel 1</title>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<style>
+
+:root{
+    --primary:#1E88E5;
+    --secondary:#1565C0;
+    --success:#2E7D32;
+    --warning:#F9A825;
+    --danger:#C62828;
+    --light:#F5F7FA;
+}
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:Arial, Helvetica, sans-serif;
+    background:#f4f6f9;
+    color:#333;
+    padding:20px;
+}
+
+.container{
+    max-width:1100px;
+    margin:auto;
+}
+
+header{
+    background:white;
+    padding:20px;
+    border-radius:10px;
+    margin-bottom:20px;
+    box-shadow:0 2px 6px rgba(0,0,0,.1);
+}
+
+h1{
+    color:var(--primary);
+}
+
+.card{
+    background:white;
+    padding:20px;
+    border-radius:10px;
+    margin-bottom:20px;
+    box-shadow:0 2px 6px rgba(0,0,0,.08);
+}
+
+.block-title{
+    color:var(--secondary);
+    margin-bottom:15px;
+}
+
+.question{
+    margin-bottom:25px;
+}
+
+.question p{
+    font-weight:bold;
+    margin-bottom:10px;
+}
+
+.option{
+    margin:6px 0;
+}
+
+input[type=text],
+input[type=email]{
+    width:100%;
+    padding:10px;
+    border:1px solid #ccc;
+    border-radius:6px;
+}
+
+button{
+    border:none;
+    padding:12px 18px;
+    border-radius:8px;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+.btn-primary{
+    background:var(--primary);
+    color:white;
+}
+
+.btn-secondary{
+    background:#555;
+    color:white;
+}
+
+.resultado{
+    margin-top:20px;
+    padding:20px;
+    background:white;
+    border-radius:10px;
+    display:none;
+}
+
+.badge{
+    display:inline-block;
+    padding:5px 10px;
+    border-radius:20px;
+    color:white;
+    font-size:.9rem;
+}
+
+.consolidado{
+    background:var(--success);
+}
+
+.adecuado{
+    background:#1976D2;
+}
+
+.desarrollo{
+    background:var(--warning);
+}
+
+.refuerzo{
+    background:var(--danger);
+}
+
+.feedback{
+    margin-top:15px;
+    padding:15px;
+    background:#f7f9fc;
+    border-left:5px solid var(--primary);
+}
+
+ul{
+    margin-left:20px;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<header>
+
+<h1>Diagnóstico Inicial - Inglés Nivel 1</h1>
+
+<p>
+Este instrumento identifica fortalezas,
+debilidades y genera una ruta adaptativa
+de aprendizaje.
+</p>
+
+</header>
+
+<div class="card">
+
+<h2>Información del estudiante</h2>
+
+<br>
+
+<label>Nombre completo</label>
+<input type="text" id="nombre">
+
+<br><br>
+
+<label>Correo electrónico</label>
+<input type="email" id="correo">
+
+<br><br>
+
+<label>Grupo</label>
+<input type="text" id="grupo">
+
+</div>
+
+<form id="quizForm">
+
+<!-- ===================================== -->
+<!-- BLOQUE 1 -->
+<!-- ===================================== -->
+
+<div class="card">
+
+<h2 class="block-title">
+Bloque 1. Saludos e interacción básica
+</h2>
+
+<div class="question">
+
+<p>1. You arrive at a job interview. What is the best greeting?</p>
+
+<label class="option">
+<input type="radio" name="p1" value="a"> Bye!
+</label><br>
+
+<label class="option">
+<input type="radio" name="p1" value="b"> Good morning.
+</label><br>
+
+<label class="option">
+<input type="radio" name="p1" value="c"> See you later.
+</label><br>
+
+<label class="option">
+<input type="radio" name="p1" value="d"> Good night.
+</label>
+
+</div>
+
+<div class="question">
+
+<p>2. A friend says "Hi!". You answer:</p>
+
+<label>
+<input type="radio" name="p2" value="a"> Hello!
+</label><br>
+
+<label>
+<input type="radio" name="p2" value="b"> Goodbye!
+</label><br>
+
+<label>
+<input type="radio" name="p2" value="c"> Thank you.
+</label><br>
+
+<label>
+<input type="radio" name="p2" value="d"> Sorry.
+</label>
+
+</div>
+
+<div class="question">
+
+<p>3. Choose the formal farewell:</p>
+
+<label>
+<input type="radio" name="p3" value="a"> See ya!
+</label><br>
+
+<label>
+<input type="radio" name="p3" value="b"> Bye-bye!
+</label><br>
+
+<label>
+<input type="radio" name="p3" value="c"> Goodbye.
+</label><br>
+
+<label>
+<input type="radio" name="p3" value="d"> Hey!
+</label>
+
+</div>
+
+<div class="question">
+
+<p>4. Which expression is informal?</p>
+
+<label>
+<input type="radio" name="p4" value="a"> Good afternoon.
+</label><br>
+
+<label>
+<input type="radio" name="p4" value="b"> How do you do?
+</label><br>
+
+<label>
+<input type="radio" name="p4" value="c"> Hi!
+</label><br>
+
+<label>
+<input type="radio" name="p4" value="d"> Good evening.
+</label>
+
+</div>
+
+</div>
+
+<!-- ===================================== -->
+<!-- BLOQUE 2 -->
+<!-- ===================================== -->
+
+<div class="card">
+
+<h2 class="block-title">
+Bloque 2. Presentación personal y verbo TO BE
+</h2>
+
+<div class="question">
+
+<p>5. Complete: I ____ a student.</p>
+
+<label>
+<input type="radio" name="p5" value="a"> am
+</label><br>
+
+<label>
+<input type="radio" name="p5" value="b"> is
+</label><br>
+
+<label>
+<input type="radio" name="p5" value="c"> are
+</label><br>
+
+<label>
+<input type="radio" name="p5" value="d"> be
+</label>
+
+</div>
+
+<div class="question">
+
+<p>6. Complete: She ____ Colombian.</p>
+
+<label>
+<input type="radio" name="p6" value="a"> am
+</label><br>
+
+<label>
+<input type="radio" name="p6" value="b"> are
+</label><br>
+
+<label>
+<input type="radio" name="p6" value="c"> is
+</label><br>
+
+<label>
+<input type="radio" name="p6" value="d"> be
+</label>
+
+</div>
+
+<div class="question">
+
+<p>7. Complete: They ____ teachers.</p>
+
+<label>
+<input type="radio" name="p7" value="a"> am
+</label><br>
+
+<label>
+<input type="radio" name="p7" value="b"> are
+</label><br>
+
+<label>
+<input type="radio" name="p7" value="c"> is
+</label><br>
+
+<label>
+<input type="radio" name="p7" value="d"> be
+</label>
+
+</div>
+
+<div class="question">
+
+<p>8. Choose the correct sentence.</p>
+
+<label>
+<input type="radio" name="p8" value="a"> He are a mechanic.
+</label><br>
+
+<label>
+<input type="radio" name="p8" value="b"> I is from Colombia.
+</label><br>
+
+<label>
+<input type="radio" name="p8" value="c"> We are students.
+</label><br>
+
+<label>
+<input type="radio" name="p8" value="d"> She am happy.
+</label>
+
+</div>
+
+</div>
+
+<!-- ===================================== -->
+<!-- BLOQUE 3 -->
+<!-- ===================================== -->
+
+<div class="card">
+
+<h2 class="block-title">
+Bloque 3. Información personal y vocabulario básico
+</h2>
+
+<div class="question">
+
+<p>9. How do you ask someone's age?</p>
+
+<label>
+<input type="radio" name="p9" value="a">
+What is your name?
+</label><br>
+
+<label>
+<input type="radio" name="p9" value="b">
+Where are you from?
+</label><br>
+
+<label>
+<input type="radio" name="p9" value="c">
+How old are you?
+</label><br>
+
+<label>
+<input type="radio" name="p9" value="d">
+What is your job?
+</label>
+
+</div>
+
+<div class="question">
+
+<p>10. Choose the occupation:</p>
+
+<label>
+<input type="radio" name="p10" value="a">
+Mother
+</label><br>
+
+<label>
+<input type="radio" name="p10" value="b">
+Blue
+</label><br>
+
+<label>
+<input type="radio" name="p10" value="c">
+Engineer
+</label><br>
+
+<label>
+<input type="radio" name="p10" value="d">
+Thirty
+</label>
+
+</div>
+
+<div class="question">
+
+<p>11. Choose the nationality:</p>
+
+<label>
+<input type="radio" name="p11" value="a">
+Bogotá
+</label><br>
+
+<label>
+<input type="radio" name="p11" value="b">
+Colombian
+</label><br>
+
+<label>
+<input type="radio" name="p11" value="c">
+Teacher
+</label><br>
+
+<label>
+<input type="radio" name="p11" value="d">
+Family
+</label>
+
+</div>
+
+<div class="question">
+
+<p>12. What number is "15"?</p>
+
+<label>
+<input type="radio" name="p12" value="a">
+Fifteen
+</label><br>
+
+<label>
+<input type="radio" name="p12" value="b">
+Fifty
+</label><br>
+
+<label>
+<input type="radio" name="p12" value="c">
+Five
+</label><br>
+
+<label>
+<input type="radio" name="p12" value="d">
+Fourteen
+</label>
+
+</div>
+
+</div>
+
+<!-- ===================================== -->
+<!-- BLOQUE 4 -->
+<!-- ===================================== -->
+
+<div class="card">
+
+<h2 class="block-title">
+Bloque 4. Rutinas y presente simple
+</h2>
+
+<div class="question">
+
+<p>13. Complete: I ____ breakfast at 7:00 a.m.</p>
+
+<label>
+<input type="radio" name="p13" value="a">
+eat
+</label><br>
+
+<label>
+<input type="radio" name="p13" value="b">
+eats
+</label><br>
+
+<label>
+<input type="radio" name="p13" value="c">
+eating
+</label><br>
+
+<label>
+<input type="radio" name="p13" value="d">
+ate
+</label>
+
+</div>
+
+<div class="question">
+
+<p>14. Complete: She ____ to work every day.</p>
+
+<label>
+<input type="radio" name="p14" value="a">
+go
+</label><br>
+
+<label>
+<input type="radio" name="p14" value="b">
+goes
+</label><br>
+
+<label>
+<input type="radio" name="p14" value="c">
+going
+</label><br>
+
+<label>
+<input type="radio" name="p14" value="d">
+gone
+</label>
+
+</div>
+
+<div class="question">
+
+<p>15. Choose the correct sentence.</p>
+
+<label>
+<input type="radio" name="p15" value="a">
+He work every day.
+</label><br>
+
+<label>
+<input type="radio" name="p15" value="b">
+She study English.
+</label><br>
+
+<label>
+<input type="radio" name="p15" value="c">
+They works at SENA.
+</label><br>
+
+<label>
+<input type="radio" name="p15" value="d">
+We study English.
+</label>
+
+</div>
+
+<div class="question">
+
+<p>16. Choose the correct preposition:</p>
+
+<label>
+<input type="radio" name="p16" value="a">
+in
+</label><br>
+
+<label>
+<input type="radio" name="p16" value="b">
+on
+</label><br>
+
+<label>
+<input type="radio" name="p16" value="c">
+at
+</label><br>
+
+<label>
+<input type="radio" name="p16" value="d">
+from
+</label>
+
+</div>
+
+</div>
+
+<!-- ===================================== -->
+<!-- BLOQUE 5 -->
+<!-- ===================================== -->
+
+<div class="card">
+
+<h2 class="block-title">
+Bloque 5. Gustos, ocupaciones y expresiones cotidianas
+</h2>
+
+<div class="question">
+
+<p>17. Complete: I ____ soccer.</p>
+
+<label>
+<input type="radio" name="p17" value="a">
+like
+</label><br>
+
+<label>
+<input type="radio" name="p17" value="b">
+likes
+</label><br>
+
+<label>
+<input type="radio" name="p17" value="c">
+liking
+</label><br>
+
+<label>
+<input type="radio" name="p17" value="d">
+liked
+</label>
+
+</div>
+
+<div class="question">
+
+<p>18. Complete: She ____ music.</p>
+
+<label>
+<input type="radio" name="p18" value="a">
+like
+</label><br>
+
+<label>
+<input type="radio" name="p18" value="b">
+likes
+</label><br>
+
+<label>
+<input type="radio" name="p18" value="c">
+liking
+</label><br>
+
+<label>
+<input type="radio" name="p18" value="d">
+liked
+</label>
+
+</div>
+
+<div class="question">
+
+<p>19. Choose the correct article:</p>
+
+<label>
+<input type="radio" name="p19" value="a">
+a
+</label><br>
+
+<label>
+<input type="radio" name="p19" value="b">
+an
+</label><br>
+
+<label>
+<input type="radio" name="p19" value="c">
+the
+</label><br>
+
+<label>
+<input type="radio" name="p19" value="d">
+no article
+</label>
+
+</div>
+
+<div class="question">
+
+<p>20. Choose the correct sentence.</p>
+
+<label>
+<input type="radio" name="p20" value="a">
+I like read books.
+</label><br>
+
+<label>
+<input type="radio" name="p20" value="b">
+I likes books.
+</label><br>
+
+<label>
+<input type="radio" name="p20" value="c">
+I like books.
+</label><br>
+
+<label>
+<input type="radio" name="p20" value="d">
+I liking books.
+</label>
+
+</div>
+
+</div>
+
+<div class="card">
+
+<button
+type="button"
+class="btn-primary"
+onclick="evaluarDiagnostico()">
+
+Evaluar Diagnóstico
+
+</button>
+
+<button
+type="button"
+class="btn-secondary"
+onclick="window.location='facilitador.html'">
+
+Ir a Facilitador
+
+</button>
+
+</div>
+
+</form>
+
+<div
+id="resultadoFinal"
+class="resultado">
+
+</div>
+
+<script>
+
+/* =====================================
+SUPABASE
+===================================== */
+
+const SUPABASE_URL =
+"https://iikwmdqlxoidrgbyzria.supabase.co";
+
+const SUPABASE_KEY =
+"sb_publishable_xhiLL7bZYkHMUwa0qc3_ew_836VsmdE";
+
+const supabaseClient =
+supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_KEY
+);
+
+/* =====================================
+RESPUESTAS CORRECTAS
+===================================== */
+
+const respuestasCorrectas = {
+
+p1:"b",
+p2:"a",
+p3:"c",
+p4:"c",
+
+p5:"a",
+p6:"c",
+p7:"b",
+p8:"c",
+
+p9:"c",
+p10:"c",
+p11:"b",
+p12:"a",
+
+p13:"a",
+p14:"b",
+p15:"d",
+p16:"b",
+
+p17:"a",
+p18:"b",
+p19:"b",
+p20:"c"
+
+};
+
+/* =====================================
+UTILIDADES
+===================================== */
+
+function nivelBloque(puntaje){
+
+    if(puntaje===4) return "Consolidado";
+
+    if(puntaje===3) return "Adecuado";
+
+    if(puntaje===2) return "En desarrollo";
+
+    return "Requiere refuerzo";
+
+}
+
+function nivelGlobal(total){
+
+    if(total>=17)
+        return "Consolidado";
+
+    if(total>=13)
+        return "Adecuado";
+
+    if(total>=9)
+        return "En desarrollo";
+
+    return "Requiere acompañamiento intensivo";
+
+}
+
+function perfilGlobal(total){
+
+    if(total<=8)
+        return "Perfil A";
+
+    if(total<=12)
+        return "Perfil B";
+
+    if(total<=16)
+        return "Perfil C";
+
+    return "Perfil D";
+
+}
+
+/* =====================================
+RETROALIMENTACIÓN
+===================================== */
+
+function generarRetroalimentacion(respuestas){
+
+    let mensajes = [];
+
+    /* ---------- BLOQUE 1 ---------- */
+
+    if(
+        respuestas.p1!=="b" ||
+        respuestas.p3!=="c"
+    ){
+
+        mensajes.push(`
+        <div class='feedback'>
+        <h4>Bloque 1</h4>
+
+        <strong>Diagnóstico:</strong>
+        Confunde expresiones formales e informales.
+
+        <ul>
+        <li>Revisar saludos laborales.</li>
+        <li>Practicar entrevistas.</li>
+        <li>Clasificar expresiones formales e informales.</li>
+        </ul>
+        </div>
+        `);
+
+    }
+
+    if(
+        respuestas.p2!=="a" ||
+        respuestas.p4!=="c"
+    ){
+
+        mensajes.push(`
+        <div class='feedback'>
+        <h4>Bloque 1</h4>
+
+        <strong>Diagnóstico:</strong>
+        Presenta dificultades para reconocer registros de lengua.
+
+        <ul>
+        <li>Escuchar audios cortos.</li>
+        <li>Identificar situaciones formales e informales.</li>
+        </ul>
+        </div>
+        `);
+
+    }
+
+    /* ---------- BLOQUE 2 ---------- */
+
+    if(respuestas.p5!=="a"){
+
+        mensajes.push(`
+        <div class='feedback'>
+        <h4>Bloque 2</h4>
+
+        <strong>Diagnóstico:</strong>
+        No reconoce el uso de AM con I.
+
+        <ul>
+        <li>Pronombres + To Be.</li>
+        <li>Ejercicios de completación.</li>
+        </ul>
+        </div>
+        `);
+
+    }
+
+    if(
+        respuestas.p6!=="c" ||
+        respuestas.p7!=="b"
+    ){
+
+        mensajes.push(`
+        <div class='feedback'>
+        <h4>Bloque 2</h4>
+
+        <strong>Diagnóstico:</strong>
+        Confunde IS y ARE.
+
+        <ul>
+        <li>Tabla visual de pronombres.</li>
+        <li>Juego de correspondencias.</li>
+        </ul>
+        </div>
+        `);
+
+    }
+
+    if(respuestas.p8!=="c"){
+
+        mensajes.push(`
+        <div class='feedback'>
+        <h4>Bloque 2</h4>
+
+        <strong>Diagnóstico:</strong>
+        Dificultades para construir oraciones completas.
+
+        <ul>
+        <li>Reordenar oraciones.</li>
+        <li>Detectar errores.</li>
+        </ul>
+        </div>
+        `);
+
+    }
+
+    /* ---------- BLOQUE 3 ---------- */
+
+    if(respuestas.p9!=="c"){
+
+        mensajes.push(`
+        <div class='feedback'>
+        <h4>Bloque 3</h4>
+
+        <strong>Diagnóstico:</strong>
+        Dificultad para formular preguntas personales.
+
+        <ul>
+        <li>What's your name?</li>
+        <li>How old are you?</li>
+        <li>Where are you from?</li>
+        </ul>
+        </div>
+        `);
+
+    }
+
+    if(
+        respuestas.p10!=="c" ||
+        respuestas.p11!=="b"
+    ){
+
+        mensajes.push(`
+        <div class='feedback'>
+        <h4>Bloque 3</h4>
+
+        <strong>Diagnóstico:</strong>
+        Vocabulario insuficiente de ocupaciones y nacionalidades.
+
+        <ul>
+        <li>Tarjetas visuales.</li>
+        <li>Ejercicios de asociación.</li>
+        </ul>
+        </div>
+        `);
+
+    }
+
+    if(respuestas.p12!=="a"){
+
+        mensajes.push(`
+        <div class='feedback'>
+        <h4>Bloque 3</h4>
+
+        <strong>Diagnóstico:</strong>
+        Reconocimiento limitado de números.
+
+        <ul>
+        <li>Práctica auditiva.</li>
+        <li>Dictado de edades y teléfonos.</li>
+        </ul>
+        </div>
+        `);
+
+    }
+
+    /* ---------- BLOQUE 4 ---------- */
+
+    if(respuestas.p13!=="a"){
+
+        mensajes.push(`
+        <div class='feedback'>
+        <h4>Bloque 4</h4>
+
+        <strong>Diagnóstico:</strong>
+        Desconoce la estructura básica del presente simple.
+
+        <ul>
+        <li>Rutinas diarias.</li>
+        <li>Construcción de horarios.</li>
+        </ul>
+        </div>
+        `);
+
+    }
+
+    if(
+        respuestas.p14!=="b" ||
+        respuestas.p15!=="d"
+    ){
+
+        mensajes.push(`
+        <div class='feedback'>
+        <h4>Bloque 4</h4>
+
+        <strong>Diagnóstico:</strong>
+        Problemas con tercera persona singular.
+
+        <ul>
+        <li>Terminación -s.</li>
+        <li>Descripción de rutinas.</li>
+        </ul>
+        </div>
+        `);
+
+    }
+
+    if(respuestas.p16!=="b"){
+
+        mensajes.push(`
+        <div class='feedback'>
+        <h4>Bloque 4</h4>
+
+        <strong>Diagnóstico:</strong>
+        Confunde IN / ON / AT.
+
+        <ul>
+        <li>Mapa visual.</li>
+        <li>Horario semanal.</li>
+        </ul>
+        </div>
+        `);
+
+    }
+
+    /* ---------- BLOQUE 5 ---------- */
+
+    if(
+        respuestas.p17!=="a" ||
+        respuestas.p18!=="b"
+    ){
+
+        mensajes.push(`
+        <div class='feedback'>
+        <h4>Bloque 5</h4>
+
+        <strong>Diagnóstico:</strong>
+        Uso incorrecto de LIKE.
+
+        <ul>
+        <li>I like...</li>
+        <li>She likes...</li>
+        </ul>
+        </div>
+        `);
+
+    }
+
+    if(respuestas.p19!=="b"){
+
+        mensajes.push(`
+        <div class='feedback'>
+        <h4>Bloque 5</h4>
+
+        <strong>Diagnóstico:</strong>
+        Dificultad con artículos A / AN.
+
+        <ul>
+        <li>Regla de sonidos vocálicos.</li>
+        </ul>
+        </div>
+        `);
+
+    }
+
+    if(respuestas.p20!=="c"){
+
+        mensajes.push(`
+        <div class='feedback'>
+        <h4>Bloque 5</h4>
+
+        <strong>Diagnóstico:</strong>
+        No construye expresiones completas sobre gustos.
+
+        <ul>
+        <li>I like books.</li>
+        <li>I like music.</li>
+        <li>I like soccer.</li>
+        </ul>
+        </div>
+        `);
+
+    }
+
+    return mensajes.join("");
+
+}
+
+/* =====================================
+EVALUACIÓN
+===================================== */
+
+async function evaluarDiagnostico(){
+
+    let respuestas = {};
+
+    let total = 0;
+
+    for(let i=1;i<=20;i++){
+
+        let seleccion =
+        document.querySelector(
+        `input[name="p${i}"]:checked`
+        );
+
+        respuestas[`p${i}`] =
+        seleccion ? seleccion.value : "";
+
+        if(
+            respuestas[`p${i}`] ===
+            respuestasCorrectas[`p${i}`]
+        ){
+            total++;
+        }
+
+    }
+
+    let bloque1 =
+    [1,2,3,4].filter(
+        x=>respuestas[`p${x}`]===
+        respuestasCorrectas[`p${x}`]
+    ).length;
+
+    let bloque2 =
+    [5,6,7,8].filter(
+        x=>respuestas[`p${x}`]===
+        respuestasCorrectas[`p${x}`]
+    ).length;
+
+    let bloque3 =
+    [9,10,11,12].filter(
+        x=>respuestas[`p${x}`]===
+        respuestasCorrectas[`p${x}`]
+    ).length;
+
+    let bloque4 =
+    [13,14,15,16].filter(
+        x=>respuestas[`p${x}`]===
+        respuestasCorrectas[`p${x}`]
+    ).length;
+
+    let bloque5 =
+    [17,18,19,20].filter(
+        x=>respuestas[`p${x}`]===
+        respuestasCorrectas[`p${x}`]
+    ).length;
+
+    let nivel =
+    nivelGlobal(total);
+
+    let perfil =
+    perfilGlobal(total);
+
+    let html = `
+
+    <h2>Resultado Global</h2>
+
+    <p>
+    Puntaje Total:
+    <strong>${total}/20</strong>
+    </p>
+
+    <p>
+    Nivel:
+    <strong>${nivel}</strong>
+    </p>
+
+    <p>
+    Ruta:
+    <strong>${perfil}</strong>
+    </p>
+
+    <hr>
+
+    <h3>Resultados por Bloque</h3>
+
+    <ul>
+
+    <li>
+    B1:
+    ${bloque1}/4
+    -
+    ${nivelBloque(bloque1)}
+    </li>
+
+    <li>
+    B2:
+    ${bloque2}/4
+    -
+    ${nivelBloque(bloque2)}
+    </li>
+
+    <li>
+    B3:
+    ${bloque3}/4
+    -
+    ${nivelBloque(bloque3)}
+    </li>
+
+    <li>
+    B4:
+    ${bloque4}/4
+    -
+    ${nivelBloque(bloque4)}
+    </li>
+
+    <li>
+    B5:
+    ${bloque5}/4
+    -
+    ${nivelBloque(bloque5)}
+    </li>
+
+    </ul>
+
+    <hr>
+
+    <h3>Retroalimentación Adaptativa</h3>
+
+    ${generarRetroalimentacion(respuestas)}
+
+    `;
+
+    document
+    .getElementById("resultadoFinal")
+    .style.display="block";
+
+    document
+    .getElementById("resultadoFinal")
+    .innerHTML=html;
+
+    try{
+
+        await supabaseClient
+        .from("diagnostico_ingles_nivel1")
+        .insert([{
+
+            nombre:
+            document.getElementById("nombre").value,
+
+            correo:
+            document.getElementById("correo").value,
+
+            grupo:
+            document.getElementById("grupo").value,
+
+            puntaje_total:total,
+
+            nivel_global:nivel,
+
+            perfil:perfil,
+
+            bloque1:bloque1,
+            bloque2:bloque2,
+            bloque3:bloque3,
+            bloque4:bloque4,
+            bloque5:bloque5,
+
+            nivel_bloque1:nivelBloque(bloque1),
+            nivel_bloque2:nivelBloque(bloque2),
+            nivel_bloque3:nivelBloque(bloque3),
+            nivel_bloque4:nivelBloque(bloque4),
+            nivel_bloque5:nivelBloque(bloque5),
+
+            respuestas:respuestas,
+
+            retroalimentacion:{
+                perfil:perfil
+            }
+
+        }]);
+
+    }catch(error){
+
+        console.error(error);
+
+        alert(
+        "Error guardando en Supabase"
+        );
+
+    }
+
+}
+
+</script>
+
+</div>
+
+</body>
+</html>
